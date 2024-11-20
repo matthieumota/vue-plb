@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vue JS</title>
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1 :title="title" @click="changeTitle('Un autre titre', $event)">{{ title }}</h1>
+      <button @click="increment(-1)" :disabled="count <= 0">-</button>
+      <!-- Interpolation Mustache -->
+      <span>{{ count }}</span>
+      <span :style="{
+        color: count * 2 >= 10000 ? 'red' : ''
+      }" :class="{
+        bold: count % 10 === 0
+      }"> (x2 => {{ count * 2 }})</span>
+      <button @click="increment(1)">+</button>
+
+      <div>
+        <input type="text" :value="count" @input="count = parseInt($event.target.value)">
+        <input type="text" v-model.number="count">
+      </div>
+
+      <p v-if="count >= 5 && count != 10">Le compteur est au moins à 5</p>
+      <p v-else-if="count == 10">Le compteur est à 10</p>
+      <p v-else>Le compteur est entre 0 et 4</p>
+
+      <ul>
+        <li v-for="(contact, index) in contacts" :key="index">
+          {{ index }}: {{ contact }}
+        </li>
+      </ul>
+      <input type="checkbox" value="Marina" v-model="contacts">
+      <input type="checkbox" value="Matthieu" v-model="contacts">
+      <input type="checkbox" value="Fiorella" v-model="contacts">
+
+      <ul>
+        <li v-for="car in cars" :key="car.id">
+          {{ car.brand }} {{ car.model }}
+        </li>
+      </ul>
+
+      {{ user }}
+      <input type="text" v-model="user.name">
+      {{ user.showName() }}
+    </div>
+
+    <script type="module">
+      import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+      class User {
+        name = 'toto';
+        showName() { return this.name?.toUpperCase() }
+      }
+
+      /*function User() {
+        return {
+          name: 'toto',
+          showName: () => this.name?.toUpperCase()
+        }
+      }*/
+
+      createApp({
+        setup() {
+          const user = ref(new User());
+          const title = ref('Mon application');
+          console.log(title.value);
+          const contacts = ref(['Marina', 'Matthieu']);
+          const cars = ref([
+            { id: 1, brand: 'Renault', model: 'Mégane' },
+            { id: 2, brand: 'Peugeot', model: '208' },
+            { id: 3, brand: 'Citroen', model: 'C3' },
+          ]);
+          const count = ref(0);
+          const increment = (value) => count.value += value;
+          const changeTitle = (newTitle, e) => {
+            console.log(e)
+            title.value = newTitle
+          };
+
+          return { user, title, contacts, cars, count, increment, changeTitle };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
