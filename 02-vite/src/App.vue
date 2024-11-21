@@ -2,7 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import Product from './Product.vue'
 import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue';
+import Footer from './components/Footer.vue'
+import Counter from './components/Counter.vue'
 
 const title = ref('Mon application Vue JS')
 const html = ref('<h2>Un titre</h2>')
@@ -98,6 +99,8 @@ const add = ({ quantity, fullName, total }) => {
     cart.value.push({ quantity, fullName, total })
   }
 }
+
+const totals = ref([0, 5, 5])
 </script>
 
 <template>
@@ -123,6 +126,14 @@ const add = ({ quantity, fullName, total }) => {
 
     <Product v-for="product in products" :product="product" @added="add($event)" />
     {{ cart }}
+
+    <div>
+      <Counter @incremented="totals[0] = $event.current" />
+      <Counter :start="totals[1]" :max="10" @incremented="totals[1] = $event.current" />
+      <Counter :start="totals[2]" :max="10" @incremented="totals[2] = $event.current" />
+      <Counter v-for="(total, index) in totals" :start="total" :max="index > 0 ? 10 : undefined" @incremented="totals[index] = $event.current" />
+      <p>Somme des compteurs: {{ totals }}</p>
+    </div>
 
     <Footer :year="2024" version="0.0.1" @clicked="title = $event" />
   </div>
