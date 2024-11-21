@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import Product from './Product.vue'
+import Navbar from './components/Navbar.vue'
 
 const title = ref('Mon application Vue JS')
 const html = ref('<h2>Un titre</h2>')
@@ -28,10 +29,16 @@ watch(name, (newName, oldName) => {
     name.value = 'alleroiF'
   }
 })
+
+const themeApp = ref('dark')
 </script>
 
 <template>
   <div>
+    <Navbar title="Mon site" :theme="themeApp" @switch-theme="themeApp = $event" />
+    <Navbar :title="title" :theme="themeApp" @switch-theme="themeApp = $event" />
+    <button @click="themeApp = themeApp === 'dark' ? 'light' : 'dark'">Changer thème</button>
+
     <h1>{{ title }}</h1>
     <div v-html="html"></div>
     <button @[event].once="title += ' avec Vite'">Changer le titre</button>
