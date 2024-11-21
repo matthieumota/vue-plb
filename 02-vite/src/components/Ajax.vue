@@ -25,6 +25,16 @@ const remove = async (index, id) => {
   users.value.splice(index, 1)
   console.log(response)
 }
+
+/**
+ * Modification
+ * - On clique sur modifier, l'emplacement du nom de l'utilisateur devient un input
+ * - Pour ça, il faut une ref qui contient l'utilisateur à modifier (null par défaut)
+ * - Ce input doit être lié à une ref (le nouveau nom de l'utilisateur)
+ * - On a 2 boutons Confirmer et Annuler.
+ * - Un clic sur confirmer valide la modification de l'utilisateur dans le tableau + fait la requête fetch (PUT)
+ * - Un clic sur annuler doit remettre l'état par défaut (supprimer le input et les 2 boutons)
+ */
 </script>
 
 <template>
