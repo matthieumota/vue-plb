@@ -2,6 +2,7 @@
 import { ofetch } from 'ofetch'
 import { onMounted, ref } from 'vue'
 import Button from './Button.vue';
+import EditUser from './EditUser.vue';
 
 const users = ref([])
 const loading = ref(false)
@@ -35,6 +36,30 @@ const remove = async (index, id) => {
  * - Un clic sur confirmer valide la modification de l'utilisateur dans le tableau + fait la requête fetch (PUT)
  * - Un clic sur annuler doit remettre l'état par défaut (supprimer le input et les 2 boutons)
  */
+const editing = ref({
+  user: null, // En train d'être modifié
+  name: '' // Potentiel nouveau nom
+})
+
+const startEdit = (user) => {
+  editing.value.user = user
+  editing.value.name = user.name
+}
+
+const cancelEdit = () => {
+  editing.value.user = null
+}
+
+const update = async () => {
+  const response = await ofetch(`https://jsonplaceholder.typicode.com/users/${editing.value.user.id}`, {
+    method: 'PUT',
+    body: { name: editing.value.name }
+  })
+  const user = users.value.find(u => u.id === response.id)
+  user.name = response.name
+  cancelEdit()
+  console.log(response)
+}
 </script>
 
 <template>
@@ -46,8 +71,10 @@ const remove = async (index, id) => {
 
   <ul v-else>
     <li v-for="(user, index) in users">
-      {{ user.name }} {{ user.email }}
-      <Button>Modifier</Button>
+      <EditUser v-if="editing.user === user" v-model="editing.name" @cancelled="cancelEdit()" @confirmed="update()" />
+      <span v-else>{{ user.name }}</span>
+      {{ user.email }}
+      <Button @click="startEdit(user)" v-if="editing.user !== user">Modifier</Button>
       <Button @click="remove(index, user.id)">Supprimer</Button>
     </li>
   </ul>
