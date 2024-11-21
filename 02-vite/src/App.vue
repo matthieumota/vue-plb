@@ -4,6 +4,7 @@ import Product from './Product.vue'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import Counter from './components/Counter.vue'
+import Input from './components/Input.vue'
 
 const title = ref('Mon application Vue JS')
 const html = ref('<h2>Un titre</h2>')
@@ -101,6 +102,7 @@ const add = ({ quantity, fullName, total }) => {
 }
 
 const totals = ref([0, 5, 5])
+const email = ref('fiorella@boxydev.com')
 </script>
 
 <template>
@@ -134,6 +136,10 @@ const totals = ref([0, 5, 5])
       <Counter v-for="(total, index) in totals" :start="total" :max="index > 0 ? 10 : undefined" @incremented="totals[index] = $event.current" />
       <p>Somme des compteurs: {{ totals }}</p>
     </div>
+
+    <Input label="Adresse email" name="email" v-model="email" />
+    <Input label="Prénom" name="firstname" v-model="email" />
+    {{ email }}
 
     <Footer :year="2024" version="0.0.1" @clicked="title = $event" />
   </div>
