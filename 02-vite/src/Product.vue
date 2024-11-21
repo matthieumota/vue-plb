@@ -1,20 +1,10 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 
-const product = ref({
-  brand: 'Brand',
-  name: 'Cat',
-  image: 'https://www.zooplus.fr/magazine/wp-content/uploads/2022/03/kitten-sitzt-boden-768x512-1.jpeg',
-  price: 1297.12,
-  stock: 100,
-  features: ['Mignon', 'Affectueux', 'Gourmand'],
-  variations: [
-    { color: 'blue', price: 0, image: 'https://www.zooplus.fr/magazine/wp-content/uploads/2022/03/kitten-sitzt-boden-768x512-1.jpeg' },
-    { color: 'red', price: 2, image: 'https://cdn.shopify.com/s/files/1/0265/1327/7008/files/comment-accueillir-un-chaton.jpg' },
-    { color: 'green', price: 6 },
-    { color: 'purple', price: 4 },
-  ]
-})
+const props = defineProps(['product'])
+const product = ref(props.product)
+
+const emit = defineEmits(['added'])
 
 const quantity = ref(1)
 const selected = ref(0) // Permet de savoir quelle variation on utilise actuellement
@@ -67,6 +57,8 @@ watch(quantity, (newValue, oldValue) => {
           @click="selected = index"
         ></div>
       </div>
+
+      <button @click="emit('added', { quantity, fullName, total: (product.price + variation.price) * quantity })">Ajouter au panier</button>
     </div>
   </div>
 </template>
