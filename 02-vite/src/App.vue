@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import Counter from './components/Counter.vue'
 import Input from './components/Input.vue'
+import Ajax from './components/Ajax.vue'
 
 const title = ref('Mon application Vue JS')
 const html = ref('<h2>Un titre</h2>')
@@ -110,6 +111,8 @@ const email = ref('fiorella@boxydev.com')
     <Navbar title="Mon site" :theme="themeApp" @switch-theme="themeApp = $event" />
     <Navbar :title="title" :theme="themeApp" @switch-theme="themeApp = $event" />
     <button @click="themeApp = themeApp === 'dark' ? 'light' : 'dark'">Changer thème</button>
+
+    <Ajax />
 
     <h1>{{ title }}</h1>
     <div v-html="html"></div>
