@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import Product from './Product.vue'
 import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue';
 
 const title = ref('Mon application Vue JS')
 const html = ref('<h2>Un titre</h2>')
@@ -55,5 +56,7 @@ const themeApp = ref('dark')
     </ul>
 
     <Product />
+
+    <Footer :year="2024" version="0.0.1" @clicked="title = $event" />
   </div>
 </template>
