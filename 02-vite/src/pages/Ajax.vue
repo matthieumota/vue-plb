@@ -16,8 +16,7 @@ const users = ref([])
 const loading = ref(false)
 const hasError = ref(false)
 
-// @todo check ssr
-onMounted(async () => {
+//onMounted(async () => {
   loading.value = true
   try {
     const response = await ofetch('https://jsonplaceholder.typicode.com/users')
@@ -25,8 +24,8 @@ onMounted(async () => {
   } catch (e) {
     hasError.value = true
   }
-  setTimeout(() => (loading.value = false), 500)
-})
+  loading.value = false
+//})
 
 const remove = async (index, id) => {
   const response = await ofetch(`https://jsonplaceholder.typicode.com/users/${id}`, {

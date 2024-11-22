@@ -5,7 +5,10 @@ import { createApp } from './main'
  * @param {string} _url
  */
 export async function render(_url) {
-  const { app } = createApp()
+  const { app, router } = createApp()
+
+  await router.push(_url)
+  await router.isReady()
 
   // passing SSR context object which will be available via useSSRContext()
   // @vitejs/plugin-vue injects code into a component's setup() that registers

@@ -3,8 +3,8 @@ import { computed, ref } from 'vue'
 
 export const useAppStore = defineStore('app', () => {
   const title = ref(
-    window.localStorage.getItem('app.title')
-    || 'Mon application Vue JS'
+    //window.localStorage.getItem('app.title') ||
+    'Mon application Vue JS'
   )
 
   const reversedTitle = computed(() => {
