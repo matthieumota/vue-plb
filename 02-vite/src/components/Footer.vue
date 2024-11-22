@@ -11,8 +11,6 @@ const newTitle = ref('')
 </script>
 
 <template>
-  <input type="text" v-model="newTitle" @keyup.enter="emit('clicked', newTitle)">
-  <footer>
-    Tous droits réservés - {{ year }}/{{ yearTen }} - {{ release }}
-  </footer>
+  <input type="text" v-model="newTitle" @keyup.enter="emit('clicked', newTitle)" />
+  <footer>Tous droits réservés - {{ year }}/{{ yearTen }} - {{ release }}</footer>
 </template>

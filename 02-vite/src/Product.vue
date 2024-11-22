@@ -25,7 +25,8 @@ watch(quantity, (newValue, oldValue) => {
     quantity.value = product.value.stock
   }
 
-  if (newValue <= 0) { // Check si la quantité passe en dessous de 0
+  if (newValue <= 0) {
+    // Check si la quantité passe en dessous de 0
     quantity.value = 1
   }
 })
@@ -34,12 +35,12 @@ watch(quantity, (newValue, oldValue) => {
 <template>
   <div class="product">
     <div>
-      <img :src="variation.image" :alt="fullName">
+      <img :src="variation.image" :alt="fullName" />
     </div>
     <div>
       <h1>{{ fullName }}</h1>
       <p>{{ total }}</p>
-      <input type="number" v-model="quantity">
+      <input type="number" v-model="quantity" />
 
       <p class="in-stock" v-if="product.stock > 0 && quantity <= product.stock">En stock</p>
       <p class="out-stock" v-else>Pas assez de stock</p>
@@ -51,14 +52,21 @@ watch(quantity, (newValue, oldValue) => {
       </ul>
 
       <div class="variations">
-        <div v-for="(variation, index) in product.variations"
+        <div
+          v-for="(variation, index) in product.variations"
           :class="{ square: true, active: selected === index }"
           :style="{ backgroundColor: variation.color }"
           @click="selected = index"
         ></div>
       </div>
 
-      <button @click="emit('added', { quantity, fullName, total: (product.price + variation.price) * quantity })">Ajouter au panier</button>
+      <button
+        @click="
+          emit('added', { quantity, fullName, total: (product.price + variation.price) * quantity })
+        "
+      >
+        Ajouter au panier
+      </button>
     </div>
   </div>
 </template>

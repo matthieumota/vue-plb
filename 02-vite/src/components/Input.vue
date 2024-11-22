@@ -10,7 +10,7 @@ const value = computed({
   },
   set(value) {
     emit('update:modelValue', value)
-  }
+  },
 })
 
 // Avec Vue 3.4+, cette ligne suffit...
@@ -20,7 +20,7 @@ const value = computed({
 <template>
   <div>
     <label :for="name">{{ label }}</label>
-    <input type="text" :name="name" :id="name" v-model="value">
+    <input type="text" :name="name" :id="name" v-model="value" />
     {{ value }}
     <button @click="value = 'toto@boxydev.com'">Changer la computed</button>
   </div>

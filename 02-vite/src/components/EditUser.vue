@@ -7,7 +7,7 @@ const editing = defineModel()
 
 <template>
   <div style="display: inline-block">
-    <input type="text" v-model="editing">
+    <input type="text" v-model="editing" />
     <Button @click="emit('cancelled')">Annuler</Button>
     <Button @click="emit('confirmed')">Confirmer</Button>
   </div>
