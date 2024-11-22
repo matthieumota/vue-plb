@@ -13,9 +13,13 @@ const emit = defineEmits(['switchTheme'])
   <div class="navbar" :class="{ dark: theme === 'dark' }">
     <h2>{{ title ?? 'Menu' }}</h2>
     <nav>
-      <a href="#">Accueil</a>
-      <a href="#">A propos</a>
-      <button @click="emit('switchTheme', theme === 'dark' ? 'light' : 'dark')">Changer thème</button>
+      <RouterLink to="/">Accueil</RouterLink>
+      <RouterLink to="/ajax">Ajax</RouterLink>
+      <RouterLink to="/produits">Produits</RouterLink>
+      <RouterLink to="/compteur">Compteur</RouterLink>
+      <button @click="emit('switchTheme', theme === 'dark' ? 'light' : 'dark')">
+        Changer thème
+      </button>
     </nav>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup>
 import { ofetch } from 'ofetch'
 import { onMounted, ref } from 'vue'
-import Button from './Button.vue';
-import EditUser from './EditUser.vue';
+import Button from '@/components/Button.vue'
+import EditUser from '@/components/EditUser.vue'
 
 const users = ref([])
 const loading = ref(false)
@@ -16,7 +16,7 @@ onMounted(async () => {
   } catch (e) {
     hasError.value = true
   }
-  setTimeout(() => loading.value = false, 500)
+  setTimeout(() => (loading.value = false), 500)
 })
 
 const remove = async (index, id) => {
@@ -38,7 +38,7 @@ const remove = async (index, id) => {
  */
 const editing = ref({
   user: null, // En train d'être modifié
-  name: '' // Potentiel nouveau nom
+  name: '', // Potentiel nouveau nom
 })
 
 const startEdit = (user) => {
@@ -51,11 +51,14 @@ const cancelEdit = () => {
 }
 
 const update = async () => {
-  const response = await ofetch(`https://jsonplaceholder.typicode.com/users/${editing.value.user.id}`, {
-    method: 'PUT',
-    body: { name: editing.value.name }
-  })
-  const user = users.value.find(u => u.id === response.id)
+  const response = await ofetch(
+    `https://jsonplaceholder.typicode.com/users/${editing.value.user.id}`,
+    {
+      method: 'PUT',
+      body: { name: editing.value.name },
+    },
+  )
+  const user = users.value.find((u) => u.id === response.id)
   user.name = response.name
   cancelEdit()
   console.log(response)
@@ -63,15 +66,18 @@ const update = async () => {
 </script>
 
 <template>
-  <div v-if="loading" style="height: 200px">
-    Chargement...
-  </div>
+  <div v-if="loading" style="height: 200px">Chargement...</div>
 
   <div v-else-if="hasError">Désolé, l'API n'est pas disponible</div>
 
   <ul v-else>
     <li v-for="(user, index) in users">
-      <EditUser v-if="editing.user === user" v-model="editing.name" @cancelled="cancelEdit()" @confirmed="update()" />
+      <EditUser
+        v-if="editing.user === user"
+        v-model="editing.name"
+        @cancelled="cancelEdit()"
+        @confirmed="update()"
+      />
       <span v-else>{{ user.name }}</span>
       {{ user.email }}
       <Button @click="startEdit(user)" v-if="editing.user !== user">Modifier</Button>
