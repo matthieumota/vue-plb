@@ -2,8 +2,11 @@
 import { ref } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '@/stores/app';
 
-const title = ref('Mon application Vue JS')
+const store = useAppStore()
+const { title } = storeToRefs(store)
 const themeApp = ref('dark')
 </script>
 
@@ -15,6 +18,6 @@ const themeApp = ref('dark')
 
     <slot />
 
-    <Footer :year="2024" version="0.0.1" @clicked="title = $event" />
+    <Footer :year="2024" version="0.0.1" @clicked="store.updateTitle($event)" />
   </div>
 </template>

@@ -16,6 +16,7 @@ const users = ref([])
 const loading = ref(false)
 const hasError = ref(false)
 
+// @todo check ssr
 onMounted(async () => {
   loading.value = true
   try {

@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '@/stores/app';
 
-const title = ref('Mon application Vue JS')
+const { title } = storeToRefs(useAppStore())
 const themeApp = ref('dark')
 </script>
 
