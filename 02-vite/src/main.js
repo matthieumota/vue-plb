@@ -1,7 +1,8 @@
-import './assets/main.css'
-
-import { createApp } from 'vue'
+import { createSSRApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-createApp(App).use(router).mount('#app')
+export function createApp() {
+  const app = createSSRApp(App).use(router)
+  return { app }
+}

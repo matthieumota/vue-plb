@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import Home from './pages/Home.vue'
 import Ajax from './pages/Ajax.vue'
 import Products from './pages/Products.vue'
@@ -9,7 +9,7 @@ import DefaultLayout from './layouts/Default.vue'
 import BlueLayout from './layouts/Blue.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
   routes: [
     { path: '/', component: Home },
     { path: '/ajax', component: Ajax },
