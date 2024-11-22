@@ -17,6 +17,7 @@ const emit = defineEmits(['switchTheme'])
       <RouterLink to="/ajax">Ajax</RouterLink>
       <RouterLink to="/produits">Produits</RouterLink>
       <RouterLink to="/compteur">Compteur</RouterLink>
+      <RouterLink to="/hello/toto">Hello Toto</RouterLink>
       <button @click="emit('switchTheme', theme === 'dark' ? 'light' : 'dark')">
         Changer thème
       </button>
