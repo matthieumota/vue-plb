@@ -1,4 +1,6 @@
 <script setup>
+import LanguageSelector from './LanguageSelector.vue';
+
 const props = defineProps(['title', 'theme'])
 console.log(props.title)
 
@@ -21,6 +23,7 @@ const emit = defineEmits(['switchTheme'])
       <button @click="emit('switchTheme', theme === 'dark' ? 'light' : 'dark')">
         Changer thème
       </button>
+      <LanguageSelector />
     </nav>
   </div>
 </template>
