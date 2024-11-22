@@ -4,6 +4,14 @@ import { onMounted, ref } from 'vue'
 import Button from '@/components/Button.vue'
 import EditUser from '@/components/EditUser.vue'
 
+/**
+ * Router exercice
+ * - Sur la page /ajax, ajouter un bouton Go sur chaque utilisateur de la liste pour aller vers /user/13 pour l'utilisateur 13 par exemple
+ * - Créer une nouvelle page /user/1
+ * - Récupérer l'id de l'url (1) et faire une requête ajax sur https://jsonplaceholder.typicode.com/users/1
+ * - Afficher les informations de l'utilisateur
+ * - Si l'utilisateur n'existe pas, le préciser avec une 404 ou autre
+ */
 const users = ref([])
 const loading = ref(false)
 const hasError = ref(false)
@@ -80,6 +88,9 @@ const update = async () => {
       />
       <span v-else>{{ user.name }}</span>
       {{ user.email }}
+      <RouterLink :to="`/utilisateur/${user.id}`" custom v-slot="{ navigate }">
+        <Button @click="navigate">Go</Button>
+      </RouterLink>
       <Button @click="startEdit(user)" v-if="editing.user !== user">Modifier</Button>
       <Button @click="remove(index, user.id)">Supprimer</Button>
     </li>

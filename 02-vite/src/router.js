@@ -4,6 +4,7 @@ import Ajax from './pages/Ajax.vue'
 import Products from './pages/Products.vue'
 import Counter from './pages/Counter.vue'
 import Hello from './pages/Hello.vue'
+import User from './pages/User.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,6 +14,7 @@ const router = createRouter({
     { path: '/produits', component: Products },
     { path: '/compteur', component: Counter },
     { path: '/hello/:name', component: Hello },
+    { path: '/utilisateur/:id', component: User },
   ],
 })
 
