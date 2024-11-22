@@ -1,20 +1,12 @@
-<script setup>
-import { ref } from 'vue'
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+import DefaultLayout from './layouts/Default.vue'
 
-const title = ref('Mon application Vue JS')
-const themeApp = ref('dark')
+const route = useRoute()
 </script>
 
 <template>
-  <div>
-    <Navbar title="Mon site" :theme="themeApp" @switch-theme="themeApp = $event" />
-    <Navbar :title="title" :theme="themeApp" @switch-theme="themeApp = $event" />
-    <button @click="themeApp = themeApp === 'dark' ? 'light' : 'dark'">Changer thème</button>
-
+  <component :is="route.meta.layout || DefaultLayout">
     <RouterView />
-
-    <Footer :year="2024" version="0.0.1" @clicked="title = $event" />
-  </div>
+  </component>
 </template>
